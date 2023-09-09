@@ -29,15 +29,17 @@ class ShellRouteExampleApp extends StatelessWidget {
   ShellRouteExampleApp({super.key});
 
   final GoRouter _router = GoRouter(
-    navigatorKey: _rootNavigatorKey, // 無いとどうなる？
+    navigatorKey: _rootNavigatorKey, // 無いと、bのdetailsに遷移するときの動きが作れない
     initialLocation: '/a',
     debugLogDiagnostics: true,
     routes: <RouteBase>[
       /// Application shell
       ShellRoute(
-        navigatorKey: _shellNavigatorKey,
+        navigatorKey: _shellNavigatorKey, //　ここはなくても良さそう。孫ルートがあればここに直接飛べるのか？
         builder: (BuildContext context, GoRouterState state, Widget child) {
+          debugPrint('ShellRoute.builder');
           // scaffoldが再利用されているように見えるが、インスペクタだと遷移するたびに色が変わってる
+          // constにできるようなものじゃ無いのでしょうが無いのかもしれない
           return ScaffoldWithNavBar(child: child);
         },
         routes: <RouteBase>[
@@ -281,14 +283,5 @@ class DetailsScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class Sample extends StatelessWidget {
-  const Sample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
   }
 }
