@@ -11,6 +11,7 @@ final GoRouter _router = GoRouter(
         path: '/',
         builder: (context, state) {
           return const RootLayout(
+            title: 'home screen',
             currentIndex: 0,
             body: HomeScreen(),
           );
@@ -19,6 +20,7 @@ final GoRouter _router = GoRouter(
       path: '/details',
       builder: (context, state) {
         return const RootLayout(
+          title: 'detail screen',
           currentIndex: 1,
           body: DetailsScreen(),
         );

@@ -3,14 +3,20 @@ import 'package:go_router/go_router.dart';
 
 class RootLayout extends StatelessWidget {
   /// Constructs a [RootLayout]
-  const RootLayout({super.key, required this.body, required this.currentIndex});
+  const RootLayout(
+      {super.key,
+      required this.body,
+      required this.currentIndex,
+      required this.title});
 
   final int currentIndex;
   final Widget body;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text(title)),
       key: const ValueKey('RootLayout'),
       body: body,
       bottomNavigationBar: NavigationBar(
@@ -47,10 +53,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Home Screen')),
-      body: const Center(child: Text('Home Screen')),
-    );
+    return const Center(child: Text('Home Screen'));
   }
 }
 
@@ -61,9 +64,6 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Details Screen')),
-      body: const Center(child: Text('Details Screen')),
-    );
+    return const Center(child: Text('Details Screen'));
   }
 }

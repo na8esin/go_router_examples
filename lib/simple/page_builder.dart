@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import './share.dart';
 
+const _pageKey = ValueKey('_pageKey');
+const _scaffoldKey = ValueKey('_scaffoldKey');
+
 void main() => runApp(const MyApp());
 
 final GoRouter _router = GoRouter(
@@ -10,7 +13,10 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       pageBuilder: (context, state) => const MaterialPage<void>(
+        key: _pageKey,
         child: RootLayout(
+          title: 'home screen',
+          key: _scaffoldKey,
           currentIndex: 0,
           body: HomeScreen(),
         ),
@@ -19,7 +25,10 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/details',
       pageBuilder: (context, state) => const MaterialPage<void>(
+        key: _pageKey,
         child: RootLayout(
+          title: 'detail screen',
+          key: _scaffoldKey,
           currentIndex: 1,
           body: DetailsScreen(),
         ),
@@ -38,4 +47,8 @@ class MyApp extends StatelessWidget {
       routerConfig: _router,
     );
   }
+}
+
+class HomePage extends MaterialPage<HomeScreen> {
+  const HomePage({required super.child});
 }
