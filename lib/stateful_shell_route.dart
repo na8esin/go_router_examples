@@ -47,14 +47,17 @@ class NestedTabNavigationExampleApp extends StatelessWidget {
                 // bottom navigation bar.
                 path: '/a',
                 builder: (BuildContext context, GoRouterState state) =>
+                    // StatelessWidget
                     const RootScreen(label: 'A', detailsPath: '/a/details'),
                 routes: <RouteBase>[
                   // The details screen to display stacked on navigator of the
                   // first tab. This will cover screen A but not the application
                   // shell (bottom navigation bar).
+                  // 別のブランチに移動して、帰ってくる間はstateが保持されてるけど、親に戻るとdetailsのstateは無くなってる
                   GoRoute(
                     path: 'details',
                     builder: (BuildContext context, GoRouterState state) =>
+                        // StatefulWidget
                         const DetailsScreen(label: 'A'),
                   ),
                 ],
@@ -216,6 +219,7 @@ class RootScreen extends StatelessWidget {
             const Padding(padding: EdgeInsets.all(4)),
             TextButton(
               onPressed: () {
+                // ここで、extraが渡せる
                 GoRouter.of(context).go(detailsPath, extra: '$label-XYZ');
               },
               child: const Text('View details'),
