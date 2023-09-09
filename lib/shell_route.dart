@@ -29,7 +29,7 @@ class ShellRouteExampleApp extends StatelessWidget {
   ShellRouteExampleApp({super.key});
 
   final GoRouter _router = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: _rootNavigatorKey, // 無いとどうなる？
     initialLocation: '/a',
     debugLogDiagnostics: true,
     routes: <RouteBase>[
@@ -37,6 +37,7 @@ class ShellRouteExampleApp extends StatelessWidget {
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         builder: (BuildContext context, GoRouterState state, Widget child) {
+          // scaffoldが再利用されているように見えるが、インスペクタだと遷移するたびに色が変わってる
           return ScaffoldWithNavBar(child: child);
         },
         routes: <RouteBase>[
@@ -217,6 +218,7 @@ class ScreenB extends StatelessWidget {
         children: <Widget>[
           const Text('Screen B'),
           TextButton(
+            // これをタップするとbottomNavigationBarが消える
             onPressed: () {
               GoRouter.of(context).go('/b/details');
             },
